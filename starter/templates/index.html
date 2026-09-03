@@ -1,0 +1,83 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sudoku Game</title>
+  <script>
+    (function () {
+      try {
+        var theme = window.localStorage.getItem('sudokuTheme');
+        if (theme === 'light' || theme === 'dark') {
+          document.documentElement.dataset.theme = theme;
+        }
+      } catch (error) {
+        // Use the default theme when storage is unavailable.
+      }
+    }());
+  </script>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header class="page-header">
+    <h1>Sudoku Game</h1>
+    <button id="theme-toggle" type="button" aria-pressed="false"
+            aria-label="Dark mode is off. Switch to dark mode">Dark Mode</button>
+  </header>
+  <main class="game-layout">
+    <section class="game-panel" aria-labelledby="game-heading">
+      <h2 id="game-heading" class="visually-hidden">Current Sudoku game</h2>
+      <div class="game-settings">
+        <label for="difficulty">Difficulty</label>
+        <select id="difficulty" name="difficulty">
+          <option value="easy">Easy</option>
+          <option value="medium" selected>Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+        <p id="current-difficulty" aria-live="polite">Difficulty: Medium</p>
+      </div>
+      <p id="game-timer" role="timer" aria-live="off"
+         aria-label="Elapsed solving time">Elapsed time: 00:00</p>
+      <p id="board-instructions" class="visually-hidden">
+        Enter numbers from 1 to 9 in empty cells. Prefilled and hinted cells are locked.
+      </p>
+      <div id="sudoku-board" aria-label="Sudoku puzzle"
+           aria-describedby="board-instructions message"></div>
+      <div class="controls" aria-label="Game controls">
+        <button id="new-game" type="button">New Game</button>
+        <button id="check-solution" type="button">Check Solution</button>
+        <button id="hint" type="button">Hint</button>
+        <span id="hint-count" aria-live="polite">Hints used: 0</span>
+        <p id="message" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+    <section class="player-section" aria-labelledby="player-heading">
+      <h2 id="player-heading">Player name</h2>
+      <label for="player-name">Name for the leaderboard</label>
+      <input id="player-name" name="player-name" type="text" maxlength="40"
+             autocomplete="name">
+      <button id="submit-score" type="button" hidden>Submit score</button>
+    </section>
+    <section class="leaderboard-section" aria-labelledby="leaderboard-heading">
+      <h2 id="leaderboard-heading">Top 10 Leaderboard</h2>
+      <div class="leaderboard-wrap">
+        <table id="leaderboard" aria-describedby="leaderboard-empty">
+          <caption>Fastest completed Sudoku games</caption>
+          <thead>
+            <tr>
+              <th scope="col">Rank</th>
+              <th scope="col">Player</th>
+              <th scope="col">Time</th>
+              <th scope="col">Difficulty</th>
+              <th scope="col">Hints</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body"></tbody>
+        </table>
+      </div>
+      <p id="leaderboard-empty">No completed games yet.</p>
+    </section>
+  </main>
+  <script src="/static/main.js"></script>
+</body>
+</html>
