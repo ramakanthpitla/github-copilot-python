@@ -3,6 +3,7 @@ import random
 
 SIZE = 9
 EMPTY = 0
+<<<<<<< HEAD
 MAX_GENERATION_ATTEMPTS = 20
 DIFFICULTY_CLUES = {
     'easy': 45,
@@ -10,10 +11,13 @@ DIFFICULTY_CLUES = {
     'hard': 25,
 }
 
+=======
+>>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
 
 def deep_copy(board):
     return copy.deepcopy(board)
 
+<<<<<<< HEAD
 
 def create_empty_board():
     return [[EMPTY for _ in range(SIZE)] for _ in range(SIZE)]
@@ -71,6 +75,11 @@ def find_conflicts(board):
     return sorted([list(position) for position in conflicts])
 
 
+=======
+def create_empty_board():
+    return [[EMPTY for _ in range(SIZE)] for _ in range(SIZE)]
+
+>>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
 def is_safe(board, row, col, num):
     # Check row and column
     for x in range(SIZE):
@@ -85,6 +94,7 @@ def is_safe(board, row, col, num):
                 return False
     return True
 
+<<<<<<< HEAD
 
 def _find_empty_cell(board):
     """Return the empty cell with the fewest possible candidates."""
@@ -202,6 +212,8 @@ def apply_hint(current_board, puzzle, solution, hinted_cells=None):
     return None
 
 
+=======
+>>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
 def fill_board(board):
     for row in range(SIZE):
         for col in range(SIZE):
@@ -217,7 +229,10 @@ def fill_board(board):
                 return False
     return True
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
 def remove_cells(board, clues):
     attempts = SIZE * SIZE - clues
     while attempts > 0:
@@ -227,6 +242,7 @@ def remove_cells(board, clues):
             board[row][col] = EMPTY
             attempts -= 1
 
+<<<<<<< HEAD
 
 def _generate_unique_puzzle(solution, clues):
     """Remove as many cells as possible while preserving one solution."""
@@ -282,3 +298,12 @@ def generate_puzzle(clues=35, difficulty=None):
 
     unique_solution = solve_board(best_puzzle)
     return best_puzzle, unique_solution
+=======
+def generate_puzzle(clues=35):
+    board = create_empty_board()
+    fill_board(board)
+    solution = deep_copy(board)
+    remove_cells(board, clues)
+    puzzle = deep_copy(board)
+    return puzzle, solution
+>>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
