@@ -1,6 +1,5 @@
 // Client-side rendering and interaction for the Flask-backed Sudoku
 const SIZE = 9;
-<<<<<<< HEAD
 const LEADERBOARD_STORAGE_KEY = 'sudokuGameLeaderboardV1';
 const THEME_STORAGE_KEY = 'sudokuTheme';
 const VALID_DIFFICULTIES = new Set(['easy', 'medium', 'hard']);
@@ -159,9 +158,6 @@ function startTimer() {
     updateTimer();
   }, 1000);
 }
-=======
-let puzzle = [];
->>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
 
 function createBoardElement() {
   const boardDiv = document.getElementById('sudoku-board');
@@ -173,7 +169,6 @@ function createBoardElement() {
       const input = document.createElement('input');
       input.type = 'text';
       input.maxLength = 1;
-<<<<<<< HEAD
       input.inputMode = 'numeric';
       input.autocomplete = 'off';
       input.className = 'sudoku-cell';
@@ -186,14 +181,6 @@ function createBoardElement() {
       input.setAttribute('aria-describedby', 'message');
       input.addEventListener('input', (e) => {
         handleCellInput(e.target);
-=======
-      input.className = 'sudoku-cell';
-      input.dataset.row = i;
-      input.dataset.col = j;
-      input.addEventListener('input', (e) => {
-        const val = e.target.value.replace(/[^1-9]/g, '');
-        e.target.value = val;
->>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
       });
       rowDiv.appendChild(input);
     }
@@ -201,7 +188,6 @@ function createBoardElement() {
   }
 }
 
-<<<<<<< HEAD
 function readBoard() {
   const inputs = document.querySelectorAll('.sudoku-cell');
   return Array.from({length: SIZE}, (_, row) =>
@@ -292,10 +278,6 @@ function renderPuzzle(puz) {
   completionPending = false;
   document.getElementById('submit-score').hidden = true;
   document.getElementById('player-name').required = false;
-=======
-function renderPuzzle(puz) {
-  puzzle = puz;
->>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
   createBoardElement();
   const boardDiv = document.getElementById('sudoku-board');
   const inputs = boardDiv.getElementsByTagName('input');
@@ -307,12 +289,8 @@ function renderPuzzle(puz) {
       if (val !== 0) {
         inp.value = val;
         inp.disabled = true;
-<<<<<<< HEAD
         inp.classList.add('prefilled');
         inp.setAttribute('aria-label', `Row ${i + 1}, column ${j + 1}, given clue ${val}`);
-=======
-        inp.className += ' prefilled';
->>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
       } else {
         inp.value = '';
         inp.disabled = false;
@@ -322,7 +300,6 @@ function renderPuzzle(puz) {
 }
 
 async function newGame() {
-<<<<<<< HEAD
   stopTimer();
   const difficulty = document.getElementById('difficulty').value;
   const res = await fetch(`/new?difficulty=${encodeURIComponent(difficulty)}`);
@@ -371,30 +348,12 @@ async function useHint() {
   input.setAttribute('aria-label', `${input.getAttribute('aria-label')}, hinted`);
   hintedCells.add(key);
   msg.innerText = `Hint filled row ${data.row + 1}, column ${data.col + 1}.`;
-=======
-  const res = await fetch('/new');
-  const data = await res.json();
-  renderPuzzle(data.puzzle);
-  document.getElementById('message').innerText = '';
->>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
 }
 
 async function checkSolution() {
   const boardDiv = document.getElementById('sudoku-board');
   const inputs = boardDiv.getElementsByTagName('input');
-<<<<<<< HEAD
   const board = readBoard();
-=======
-  const board = [];
-  for (let i = 0; i < SIZE; i++) {
-    board[i] = [];
-    for (let j = 0; j < SIZE; j++) {
-      const idx = i * SIZE + j;
-      const val = inputs[idx].value;
-      board[i][j] = val ? parseInt(val, 10) : 0;
-    }
-  }
->>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
   const res = await fetch('/check', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
@@ -408,7 +367,6 @@ async function checkSolution() {
     return;
   }
   const incorrect = new Set(data.incorrect.map(x => x[0]*SIZE + x[1]));
-<<<<<<< HEAD
   refreshConflicts();
   for (let idx = 0; idx < inputs.length; idx++) {
     const inp = inputs[idx];
@@ -436,28 +394,11 @@ async function checkSolution() {
     msg.className = 'error-message';
     msg.style.color = '#d32f2f';
     msg.innerText = `${incorrect.size} incorrect cell${incorrect.size === 1 ? '' : 's'}.`;
-=======
-  for (let idx = 0; idx < inputs.length; idx++) {
-    const inp = inputs[idx];
-    if (inp.disabled) continue;
-    inp.className = 'sudoku-cell';
-    if (incorrect.has(idx)) {
-      inp.className = 'sudoku-cell incorrect';
-    }
-  }
-  if (incorrect.size === 0) {
-    msg.style.color = '#388e3c';
-    msg.innerText = 'Congratulations! You solved it!';
-  } else {
-    msg.style.color = '#d32f2f';
-    msg.innerText = 'Some cells are incorrect.';
->>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
   }
 }
 
 // Wire buttons
 window.addEventListener('load', () => {
-<<<<<<< HEAD
   setTheme(getStoredTheme() || document.documentElement.dataset.theme || 'light', false);
   document.getElementById('theme-toggle').addEventListener('click', () => {
     const currentTheme = document.documentElement.dataset.theme || 'light';
@@ -476,10 +417,6 @@ window.addEventListener('load', () => {
     }
   });
   renderLeaderboard();
-=======
-  document.getElementById('new-game').addEventListener('click', newGame);
-  document.getElementById('check-solution').addEventListener('click', checkSolution);
->>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
   // initialize
   newGame();
 });

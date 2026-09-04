@@ -1,5 +1,2 @@
 Flask>=2.0
-<<<<<<< HEAD
 pytest
-=======
->>>>>>> 8dc0113ed48f050354faa18de11c2047da621ea0
