@@ -72,10 +72,7 @@ body {
 }
 
 .page-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 20px;
+    text-align: center;
     padding: 28px 16px 20px;
     background: var(--surface);
     border-bottom: 1px solid var(--border);
@@ -100,14 +97,13 @@ main {
 }
 
 .game-panel {
-    max-width: 520px;
+    max-width: 960px;
     margin: 0 auto;
 }
 
 .game-settings {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-wrap: wrap;
     gap: 8px 12px;
 }
@@ -134,18 +130,20 @@ select {
 }
 
 #game-timer {
-    margin: 18px auto 12px;
-    font-size: 22px;
+    margin: 0;
+    padding: 8px 10px;
+    font-size: 16px;
     font-variant-numeric: tabular-nums;
     font-weight: bold;
     color: var(--timer);
+    white-space: nowrap;
 }
 
 #sudoku-board {
     display: block;
-    width: min(100%, 468px);
+    width: min(100%, 520px);
     aspect-ratio: 1;
-    margin: 24px auto;
+    margin: 16px auto 24px;
     border: 4px solid var(--strong-border);
     background: var(--surface);
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -205,7 +203,7 @@ select {
 
 .sudoku-cell.incorrect {
     background: var(--incorrect-background);
-    border: 3px dotted var(--incorrect-border);
+    box-shadow: inset 0 0 0 3px var(--incorrect-border);
     font-weight: 700;
     text-decoration: underline wavy var(--incorrect-border);
 }
@@ -213,7 +211,7 @@ select {
 .sudoku-cell.conflict,
 .sudoku-cell.invalid-input {
     background: var(--warning-background);
-    border: 3px dashed var(--warning-text);
+    box-shadow: inset 0 0 0 3px var(--warning-text);
     text-decoration: underline wavy var(--warning-text);
 }
 
@@ -232,8 +230,8 @@ select {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 12px;
-    margin: 20px auto 28px;
+    gap: 8px;
+    margin: 20px auto 16px;
 }
 
 .controls button,
@@ -244,6 +242,15 @@ select {
 
 .controls button {
     margin: 0;
+}
+
+.controls .game-settings {
+    flex: 0 1 auto;
+}
+
+.controls #hint-count {
+    color: var(--muted-text);
+    white-space: nowrap;
 }
 
 .player-section,

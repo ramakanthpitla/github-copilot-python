@@ -139,7 +139,7 @@ function formatElapsedTime(seconds) {
 
 function updateTimer() {
   document.getElementById('game-timer').innerText =
-    `Elapsed time: ${formatElapsedTime(elapsedSeconds)}`;
+    `Time: ${formatElapsedTime(elapsedSeconds)}`;
 }
 
 function stopTimer() {
